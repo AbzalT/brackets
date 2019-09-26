@@ -9,3 +9,10 @@ module.exports = check =  (text, bracketsConfig, stack=[]) => {
   );
   return (stack.length == 0);                                                         // Если скобок парное количество то стек пустой
 }
+
+// В одну строку
+// module.exports = check =  (text, bracketsConfig) =>   
+//   [...text].reduce((stack, char) => {                                                            
+//     bracketsConfig.forEach(bracket => {(stack[stack.length-1] == bracket[0]  && char == bracket[1]) ? stack.pop() : ((char == bracket[0] || char == bracket[1]) ? stack.push(char) : undefined)});    
+//     return stack;},[]).length == 0 ? true : false;
+
