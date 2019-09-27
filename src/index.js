@@ -3,7 +3,7 @@ module.exports = check =  (text, bracketsConfig, stack=[]) => {
       bracketsConfig.forEach( bracket => {                                            // проверяется принадлежность к скобочным символам
         (stack[stack.length-1] == bracket[0]  && char == bracket[1]) ?                // Если найдена пара скобок одного типа в правильной последовательности
           stack.pop() :                                                               // То удалить из стека эту пару скобок
-          ((char == bracket[0] || char == bracket[1]) ? stack.push(char) : undefined) // Если входной символ является скобочным одного типа, то поместить его в стек
+          ((bracket.includes(char)) ? stack.push(char) : undefined)                    // Если входной символ является скобочным одного типа, то поместить его в стек
       }); 
     }
   );
@@ -13,6 +13,6 @@ module.exports = check =  (text, bracketsConfig, stack=[]) => {
 // В одну строку
 // module.exports = check =  (text, bracketsConfig) =>   
 //   [...text].reduce((stack, char) => {                                                            
-//     bracketsConfig.forEach(bracket => {(stack[stack.length-1] == bracket[0]  && char == bracket[1]) ? stack.pop() : ((char == bracket[0] || char == bracket[1]) ? stack.push(char) : undefined)});    
+//     bracketsConfig.forEach(bracket => {([stack[stack.length-1], char].every((value, index)=> value == bracket[index])) ? stack.pop() : (bracket.includes(char) ? stack.push(char) : undefined)});    
 //     return stack;},[]).length == 0 ? true : false;
-
+    
